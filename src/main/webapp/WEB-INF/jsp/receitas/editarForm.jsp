@@ -5,7 +5,7 @@
 
 <fmt:formatNumber value="${receita.valor}" var="valorFormatado" pattern="0.00" />
 <fmt:parseDate value="${receita.data}" var="parsedDate" type="date" pattern="yyyy-MM-dd" />
-<fmt:formatDate value="${parsedDate}" type="date" var="dataFormatado" />
+<fmt:formatDate value="${parsedDate}" type="date" var="dataFormatada" />
 
 <t:logged-page>
   <jsp:body>
@@ -57,9 +57,9 @@
             </label>
             <input
               class="w-4/5 bg-grey-lighter appearance-none border-2 border-grey-lighter rounded shadow w-full py-2 px-4 mr-5 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light"
-              placeholder="DD de mmm de AAAA"
+              placeholder="20 de nov de 2018"
               id="receita.data"
-              value="${dataFormatado}"
+              value="${dataFormatada}"
               name="receita.data"
             />
           </div>

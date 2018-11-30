@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import org.apache.shiro.SecurityUtils;
@@ -10,12 +12,13 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import helpers.AuthHelper;
+import modelo.Categoria;
 import modelo.ControleMensal;
-import modelo.Receita;
+import modelo.Despesa;
 import modelo.dao.DAOFactory;
 
 @Controller
-public class ReceitasController {
+public class DespesasController {
 
   @Inject
   private Result result;
@@ -30,15 +33,34 @@ public class ReceitasController {
   }
 
   @Get
-  @Path("/receitas/adicionar")
+  @Path("/despesas/adicionar")
   public void adicionarForm(String errorMessage) {
     AuthHelper.isAuthenticated(result);
     this.setErrorMessage(errorMessage);
+
+    var categorias = new ArrayList<Categoria>();
+    try {
+      var daoFac = new DAOFactory();
+      daoFac.abrirConexao();
+      try {
+        var categoriasDAO = daoFac.criarCategoriaDAO();
+
+        categorias = categoriasDAO.buscarLista();
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      } finally {
+        daoFac.fecharConexao();
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+
+    result.include("categorias", categorias);
   }
 
   @Post
-  @Path("/receitas/adicionar")
-  public void adicionar(Receita receita) {
+  @Path("/despesas/adicionar")
+  public void adicionar(Despesa despesa) {
     AuthHelper.isAuthenticated(result);
     var userEmail = SecurityUtils.getSubject().getPrincipal().toString();
 
@@ -48,12 +70,12 @@ public class ReceitasController {
       try {
         var controleMensalDAO = daoFac.criarControleMensalDAO();
         var usuarioDAO = daoFac.criarUsuarioDAO();
-        var receitaDAO = daoFac.criarReceitaDAO();
+        var despesaDAO = daoFac.criarDespesaDAO();
 
         var usuario = usuarioDAO.buscar(userEmail);
 
-        var mes = receita.getData().getMonthValue();
-        var ano = receita.getData().getYear();
+        var mes = despesa.getData().getMonthValue();
+        var ano = despesa.getData().getYear();
         var controleMensal = controleMensalDAO.buscar(usuario.getId(), mes, ano);
 
         if (controleMensal == null) {
@@ -65,34 +87,37 @@ public class ReceitasController {
           controleMensalDAO.gravar(controleMensal);
         }
         
-        receita.setControleMensalId(controleMensal.getId());
+        despesa.setControleMensalId(controleMensal.getId());
 
-        receitaDAO.gravar(receita);
+        despesaDAO.gravar(despesa);
 
         result.redirectTo(HomeController.class).index(null);
       } catch (Exception e) {
-        result.redirectTo(ReceitasController.class).adicionarForm(e.getMessage());
+        result.redirectTo(DespesasController.class).adicionarForm(e.getMessage());
       } finally {
         daoFac.fecharConexao();
       }
     } catch (Exception e) {
-      result.redirectTo(ReceitasController.class).adicionarForm(e.getMessage());
+      result.redirectTo(DespesasController.class).adicionarForm(e.getMessage());
     }
   }
 
   @Get
-  @Path("/receitas/{receita.id}/edit")
-  public Receita editarForm(Receita receita, String errorMessage) {
+  @Path("/despesas/{despesa.id}/edit")
+  public Despesa editarForm(Despesa despesa, String errorMessage) {
     AuthHelper.isAuthenticated(result);
     this.setErrorMessage(errorMessage);
 
+    var categorias = new ArrayList<Categoria>();
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();
       try {
-        var receitaDAO = daoFac.criarReceitaDAO();
+        var despesaDAO = daoFac.criarDespesaDAO();
+        despesa = despesaDAO.buscar(despesa.getId());
 
-        receita = receitaDAO.buscar(receita.getId());
+        var categoriasDAO = daoFac.criarCategoriaDAO();
+        categorias = categoriasDAO.buscarLista();
       } catch (Exception e) {
         System.out.println(e.getMessage());
       } finally {
@@ -102,42 +127,43 @@ public class ReceitasController {
       System.out.println(e.getMessage());
     }
 
-    return receita;
+    result.include("categorias", categorias);
+    return despesa;
   }
 
   @Post
-  @Path("/receitas/editar")
-  public void editar(Receita receita) {
+  @Path("/despesas/editar")
+  public void editar(Despesa despesa) {
     AuthHelper.isAuthenticated(result);
 
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();
       try {
-        var receitaDAO = daoFac.criarReceitaDAO();
-        receitaDAO.editar(receita);
+        var despesaDAO = daoFac.criarDespesaDAO();
+        despesaDAO.editar(despesa);
 
         result.redirectTo(HomeController.class).index(null);
       } catch (Exception e) {
-        result.redirectTo(ReceitasController.class).editarForm(receita, e.getMessage());
+        result.redirectTo(DespesasController.class).editarForm(despesa, e.getMessage());
       } finally {
         daoFac.fecharConexao();
       }
     } catch (Exception e) {
-      result.redirectTo(ReceitasController.class).editarForm(receita, e.getMessage());
+      result.redirectTo(DespesasController.class).editarForm(despesa, e.getMessage());
     }
   }
 
-  @Path("/receitas/{receita.id}/deletar")
-  public void deletar(Receita receita) {
+  @Path("/despesas/{despesa.id}/deletar")
+  public void deletar(Despesa despesa) {
     AuthHelper.isAuthenticated(result);
 
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();
       try {
-        var receitaDAO = daoFac.criarReceitaDAO();
-        receitaDAO.remover(receita);
+        var despesaDAO = daoFac.criarDespesaDAO();
+        despesaDAO.remover(despesa);
 
         result.redirectTo(HomeController.class).index(null);
       } catch (Exception e) {

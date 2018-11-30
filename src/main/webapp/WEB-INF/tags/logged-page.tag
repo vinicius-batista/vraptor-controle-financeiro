@@ -3,7 +3,7 @@
 <c:set var="url" value="${pageContext.request.requestURI}"/>
 <c:set var="activeClasses" value="border-blue-dark text-blue-dark"/>
 <c:set var="homeUrl" value="/controle-financeiro/WEB-INF/jsp/home/index.jsp"/>
-<c:set var="addDespesaUrl" value=""/>
+<c:set var="addDespesaUrl" value="/controle-financeiro/WEB-INF/jsp/despesas/adicionarForm.jsp"/>
 <c:set var="addReceitaUrl" value="/controle-financeiro/WEB-INF/jsp/receitas/adicionarForm.jsp"/>
 <c:set var="relMensalUrl" value=""/>
 <c:set var="addCategoriaUrl" value=""/>
@@ -60,7 +60,7 @@
               </div>
               <div class="flex">
                 <a
-                  href="#1"
+                  href="/controle-financeiro/despesas/adicionar"
                   class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(addDespesaUrl) ? activeClasses : ''}"
                 >
                   <i class="fas fa-cut"></i>

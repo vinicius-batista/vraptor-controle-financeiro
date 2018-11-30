@@ -132,10 +132,10 @@
                   <fmt:formatNumber value="${despesa.valor}" type="currency"/>
                 </span>
                 <div class="w-1/5 text-lg">
-                  <a href="#" class="text-grey-darker mx-5">
+                  <a href="/controle-financeiro/despesas/${despesa.id}/edit" class="text-grey-darker mx-5">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <a href="#" class="text-grey-darker">
+                  <a href="/controle-financeiro/despesas/${despesa.id}/deletar" class="text-grey-darker">
                     <i class="fas fa-trash"></i>
                   </a>
                 </div>

@@ -3,6 +3,7 @@ package modelo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import modelo.Categoria;
 
@@ -29,6 +30,21 @@ public class CategoriaDAO {
         System.out.println("A inserção não foi feita corretamente.");
       }
     }
+  }
+
+  public ArrayList<Categoria> buscarLista() throws SQLException { 
+    var categorias = new ArrayList<Categoria>();
+    var query = "SELECT * FROM categorias";
+
+    try (PreparedStatement pstmt = conexao.prepareStatement(query)) {
+      try (var rs = pstmt.executeQuery()) {
+        while (rs.next()) {
+          var categoria = new Categoria(rs.getInt(1), rs.getString(2));
+          categorias.add(categoria);
+        }
+      }
+    }
+    return categorias;
   }
 
   public Categoria buscar(int id) throws SQLException {
