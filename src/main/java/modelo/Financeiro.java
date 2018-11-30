@@ -1,18 +1,18 @@
 package modelo;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public abstract class Financeiro {
   private int id;
   private int controleMensalId;
   private String descricao;
   private double valor;
-  private Date data;
+  private LocalDate data;
 
   public Financeiro() {
   }
 
-  public Financeiro(int id, int controleMensalId, String descricao, double valor, Date data) {
+  public Financeiro(int id, int controleMensalId, String descricao, double valor, LocalDate data) {
     this.id = id;
     this.controleMensalId = controleMensalId;
     this.descricao = descricao;
@@ -23,14 +23,14 @@ public abstract class Financeiro {
   /**
    * @return the data
    */
-  public Date getData() {
+  public LocalDate getData() {
     return data;
   }
 
   /**
    * @param data the data to set
    */
-  public void setData(Date data) {
+  public void setData(LocalDate data) {
     this.data = data;
   }
 

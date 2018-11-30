@@ -1,6 +1,6 @@
 package modelo;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Despesa extends Financeiro {
   private Categoria categoria;
@@ -9,7 +9,7 @@ public class Despesa extends Financeiro {
 
   }
 
-  public Despesa(int id, int controleMensalId, String descricao, double valor, Date data, Categoria categoria) {
+  public Despesa(int id, int controleMensalId, String descricao, double valor, LocalDate data, Categoria categoria) {
     super(id, controleMensalId, descricao, valor, data);
     this.categoria = categoria;
   }

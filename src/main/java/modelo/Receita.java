@@ -1,12 +1,12 @@
 package modelo;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Receita extends Financeiro {
   public Receita() {
   }
 
-  public Receita(int id, int controleMensalId, String descricao, double valor, Date data) {
+  public Receita(int id, int controleMensalId, String descricao, double valor, LocalDate data) {
     super(id, controleMensalId, descricao, valor, data);
   }
 }

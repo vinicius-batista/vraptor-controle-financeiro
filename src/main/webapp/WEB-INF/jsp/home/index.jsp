@@ -104,7 +104,7 @@
                   <fmt:formatNumber value="${receita.valor}" type="currency"/>
                 </span>
                 <div class="w-1/5 text-lg">
-                  <a href="#" class="text-grey-darker mx-5">
+                  <a href="/controle-financeiro/receitas/${receita.id}/edit" class="text-grey-darker mx-5">
                     <i class="fas fa-edit"></i>
                   </a>
                   <a href="#" class="text-grey-darker">
@@ -112,7 +112,7 @@
                   </a>
                 </div>
                 <span class="w-1/3 pt-2 text-grey-darker text-sm">
-                  <fmt:formatDate value="${receita.data}" />
+                  <t:localDate date="${receita.data}" />
                 </span>
               </li>
             </c:forEach>
@@ -143,7 +143,7 @@
                   ${despesa.categoria.nome}
                 </p>
                 <span class="w-1/3 pt-2 text-grey-darker text-sm">
-                  <fmt:formatDate value="${despesa.data}" />
+                  <t:localDate date="${despesa.data}"/>
                 </span>
               </li>
             </c:forEach>

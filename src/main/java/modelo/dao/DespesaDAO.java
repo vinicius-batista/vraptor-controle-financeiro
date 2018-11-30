@@ -1,6 +1,7 @@
 package modelo.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class DespesaDAO {
       pstmt.setInt(1, despesa.getControleMensalId());
       pstmt.setString(2, despesa.getDescricao());
       pstmt.setDouble(3, despesa.getValor());
-      pstmt.setDate(4, despesa.getData());
+      pstmt.setDate(4, Date.valueOf(despesa.getData()));
       pstmt.setInt(5, despesa.getCategoria().getId());
 
       var resultado = pstmt.executeUpdate();
@@ -48,7 +49,7 @@ public class DespesaDAO {
       try (var rs = pstmt.executeQuery()) {
         while (rs.next()) {
           var categoria = new Categoria(rs.getInt(7), rs.getString(8));
-          var despesa = new Despesa(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDouble(4), rs.getDate(5),
+          var despesa = new Despesa(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDouble(4), rs.getDate(5).toLocalDate(),
               categoria);
           despesas.add(despesa);
         }
@@ -67,7 +68,7 @@ public class DespesaDAO {
       try (var rs = pstmt.executeQuery()) {
         if (rs.next()) {
           var categoria = new Categoria(rs.getInt(7), rs.getString(8));
-          despesa = new Despesa(rs.getInt(1), rs.getInt(2), rs.getString(4), rs.getDouble(3), rs.getDate(5), categoria);
+          despesa = new Despesa(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDouble(4), rs.getDate(5).toLocalDate(), categoria);
         }
       }
     }
@@ -79,7 +80,7 @@ public class DespesaDAO {
     try (PreparedStatement pstmt = conexao.prepareStatement(query)) {
       pstmt.setString(1, despesa.getDescricao());
       pstmt.setDouble(2, despesa.getValor());
-      pstmt.setDate(3, despesa.getData());
+      pstmt.setDate(3, Date.valueOf(despesa.getData()));
       pstmt.setInt(4, despesa.getCategoria().getId());
       pstmt.setInt(5, despesa.getId());
 

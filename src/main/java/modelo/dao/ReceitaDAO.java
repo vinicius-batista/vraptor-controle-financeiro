@@ -1,6 +1,7 @@
 package modelo.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class ReceitaDAO {
       pstmt.setInt(1, receita.getControleMensalId());
       pstmt.setString(2, receita.getDescricao());
       pstmt.setDouble(3, receita.getValor());
-      pstmt.setDate(4, receita.getData());
+      pstmt.setDate(4, Date.valueOf(receita.getData()));
 
       var resultado = pstmt.executeUpdate();
       if (resultado == 1) {
@@ -43,7 +44,7 @@ public class ReceitaDAO {
       pstmt.setInt(1, controleMensalId);
       try (var rs = pstmt.executeQuery()) {
         while (rs.next()) {
-          var receita = new Receita(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDouble(4), rs.getDate(5));
+          var receita = new Receita(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDouble(4), rs.getDate(5).toLocalDate());
           receitas.add(receita);
         }
       }
@@ -59,7 +60,7 @@ public class ReceitaDAO {
       pstmt.setInt(1, id);
       try (var rs = pstmt.executeQuery()) {
         if (rs.next()) {
-          receita = new Receita(rs.getInt(1), rs.getInt(2), rs.getString(4), rs.getDouble(3), rs.getDate(5));
+          receita = new Receita(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDouble(4), rs.getDate(5).toLocalDate());
         }
       }
     }
@@ -71,7 +72,7 @@ public class ReceitaDAO {
     try (PreparedStatement pstmt = conexao.prepareStatement(query)) {
       pstmt.setString(1, receita.getDescricao());
       pstmt.setDouble(2, receita.getValor());
-      pstmt.setDate(3, receita.getData());
+      pstmt.setDate(3, Date.valueOf(receita.getData()));
       pstmt.setInt(4, receita.getId());
 
       var resultado = pstmt.executeUpdate();
