@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Context path="/controle-financeiro">
+  <Resource 
+    name="jdbc/controle-financeiro"
+    type="javax.sql.DataSource"
+    auth="Container"
+    maxTotal="10"
+    maxIdle="2"
+    maxWaitMillis="1000000"
+    username="root"
+    password="12345"
+    driverClassName="com.mysql.cj.jdbc.Driver"
+    jdbcUrl="jdbc:mysql://db-controle-financeiro:3306/controle-financeiro"
+    url="jdbc:mysql://db-controle-financeiro:3306/controle-financeiro"
+    factory="com.zaxxer.hikari.HikariJNDIFactory"
+    closeMethod="close"
+  />
+</Context>
