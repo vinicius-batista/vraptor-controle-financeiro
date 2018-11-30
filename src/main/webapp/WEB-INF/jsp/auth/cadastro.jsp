@@ -19,7 +19,7 @@
               Nome
             </label>
             <input
-              class="w-4/5 bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 mr-5 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light"
+              class="w-4/5 bg-grey-lighter appearance-none shadow border-2 border-grey-lighter rounded w-full py-2 px-4 mr-5 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light"
               id="nome"
               name="usuario.nome"
               placeholder="Josenaldo da Costa"
@@ -33,7 +33,7 @@
               Email
             </label>
             <input
-              class="w-4/5 bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 mr-5 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light"
+              class="w-4/5 bg-grey-lighter appearance-none shadow border-2 border-grey-lighter rounded w-full py-2 px-4 mr-5 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light"
               id="email"
               name="usuario.email"
               placeholder="email@email.com"
@@ -47,7 +47,7 @@
               Senha
             </label>
             <input
-              class="bg-grey-lighter w-4/5 appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 mr-5 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light"
+              class="bg-grey-lighter w-4/5 appearance-none shadow border-2 border-grey-lighter rounded w-full py-2 px-4 mr-5 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light"
               id="senha"
               name="usuario.senha"
               type="password"
