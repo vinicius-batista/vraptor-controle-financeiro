@@ -107,7 +107,7 @@
                   <a href="/controle-financeiro/receitas/${receita.id}/edit" class="text-grey-darker mx-5">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <a href="#" class="text-grey-darker">
+                  <a href="/controle-financeiro/receitas/${receita.id}/deletar" class="text-grey-darker">
                     <i class="fas fa-trash"></i>
                   </a>
                 </div>

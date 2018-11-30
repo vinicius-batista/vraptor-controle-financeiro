@@ -4,7 +4,7 @@
 <c:set var="activeClasses" value="border-blue-dark text-blue-dark"/>
 <c:set var="homeUrl" value="/controle-financeiro/WEB-INF/jsp/home/index.jsp"/>
 <c:set var="addDespesaUrl" value=""/>
-<c:set var="addGanhoUrl" value=""/>
+<c:set var="addReceitaUrl" value="/controle-financeiro/WEB-INF/jsp/receitas/adicionarForm.jsp"/>
 <c:set var="relMensalUrl" value=""/>
 <c:set var="addCategoriaUrl" value=""/>
 <c:set var="logoutUrl" value=""/>
@@ -69,8 +69,8 @@
               </div>
               <div class="flex">
                 <a
-                  href="#2"
-                  class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(addGanhoUrl) ? activeClasses : ''}"
+                  href="/controle-financeiro/receitas/adicionar"
+                  class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(addReceitaUrl) ? activeClasses : ''}"
                 >
                   <i class="fas fa-hand-holding-usd"></i>
                   <span class="ml-4">Adicionar receita</span>
