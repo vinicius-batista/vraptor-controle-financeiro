@@ -24,7 +24,7 @@
               class="w-4/5 bg-grey-lighter appearance-none border-2 border-grey-lighter rounded shadow w-full py-2 px-4 mr-5 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-blue-light"
               id="despesa.descricao"
               name="despesa.descricao"
-              placeholder="Salario"
+              placeholder="Lanche da tarde"
             />
           </div>
           <div class="mb-4 flex">
