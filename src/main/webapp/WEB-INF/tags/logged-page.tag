@@ -81,11 +81,12 @@
               <shiro:hasRole name="admin">
                 <div class="flex">
                   <a
-                    href="#4"
+                    href="/controle-financeiro/relatorios/usuarios"
+                    target="resource window"
                     class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(relMensalUrl) ? activeClasses : ''}"
                   >
                     <i class="fas fa-chart-line"></i>
-                    <span class="ml-4">Relatório mensal</span>
+                    <span class="ml-4">Relatório de usuários</span>
                   </a>
                 </div>
               </shiro:hasRole>
