@@ -7,6 +7,7 @@
 <c:set var="addReceitaUrl" value="/controle-financeiro/WEB-INF/jsp/receitas/adicionarForm.jsp"/>
 <c:set var="relMensalUrl" value=""/>
 <c:set var="addCategoriaUrl" value="/controle-financeiro/WEB-INF/jsp/categorias/index.jsp"/>
+<c:set var="addUsuarioUrl" value="/controle-financeiro/WEB-INF/jsp/auth/cadastroAdmin.jsp"/>
 <c:set var="logoutUrl" value=""/>
 
 <!DOCTYPE html>
@@ -92,6 +93,15 @@
                 >
                   <i class="fas fa-plus"></i>
                   <span class="ml-4">Cadastrar categoria</span>
+                </a>
+              </div>
+              <div class="flex">
+                <a
+                  href="/controle-financeiro/auth/cadastro-admin"
+                  class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(addUsuarioUrl) ? activeClasses : ''}"
+                >
+                  <i class="fas fa-user-plus"></i>
+                  <span class="ml-4">Cadastrar Usuário</span>
                 </a>
               </div>
               <div class="flex">

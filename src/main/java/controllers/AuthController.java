@@ -6,6 +6,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import helpers.SenhaHelper;
 import modelo.Usuario;
@@ -68,6 +69,34 @@ public class AuthController {
 			}
 		} catch (Exception e) {
 			result.redirectTo(AuthController.class).cadastro(e.getMessage());
+		}
+	}
+
+	@Path("/auth/cadastro-admin")
+	public void cadastroAdmin(String errorMessage) {
+		setErrorMessage(errorMessage);
+	}
+
+	@Path("/auth/cadastrar-admin")
+	public void cadastrarAdmin(Usuario usuario) {
+		var encryptedSenha = SenhaHelper.gerarHash(usuario.getSenha());
+		usuario.setSenha(encryptedSenha);
+		usuario.setRole("user");
+		try {
+			var daoFac = new DAOFactory();
+			daoFac.abrirConexao();
+			try {
+				var usuarioDAO = daoFac.criarUsuarioDAO();
+				usuarioDAO.registrar(usuario);
+
+				result.redirectTo(HomeController.class).index(null);
+			} catch (Exception e) {
+				result.redirectTo(AuthController.class).cadastroAdmin(e.getMessage());
+			} finally {
+				daoFac.fecharConexao();
+			}
+		} catch (Exception e) {
+			result.redirectTo(AuthController.class).cadastroAdmin(e.getMessage());
 		}
 	}
 }

@@ -60,7 +60,7 @@ public class ControleMensalDAO {
 
       var receitaDao = new ReceitaDAO(this.conexao);
       var receitas = receitaDao.buscarLista(controleMensal.getId());
-      System.out.println("DESPESAS: " + despesas.isEmpty());
+
       controleMensal.setDespesas(despesas);
       controleMensal.setReceitas(receitas);
 
