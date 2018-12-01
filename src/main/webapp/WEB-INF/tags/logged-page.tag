@@ -6,7 +6,7 @@
 <c:set var="addDespesaUrl" value="/controle-financeiro/WEB-INF/jsp/despesas/adicionarForm.jsp"/>
 <c:set var="addReceitaUrl" value="/controle-financeiro/WEB-INF/jsp/receitas/adicionarForm.jsp"/>
 <c:set var="relMensalUrl" value=""/>
-<c:set var="addCategoriaUrl" value=""/>
+<c:set var="addCategoriaUrl" value="/controle-financeiro/WEB-INF/jsp/categorias/index.jsp"/>
 <c:set var="logoutUrl" value=""/>
 
 <!DOCTYPE html>
@@ -87,7 +87,7 @@
               </div>
               <div class="flex">
                 <a
-                  href="#5"
+                  href="/controle-financeiro/categorias/"
                   class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(addCategoriaUrl) ? activeClasses : ''}"
                 >
                   <i class="fas fa-plus"></i>
