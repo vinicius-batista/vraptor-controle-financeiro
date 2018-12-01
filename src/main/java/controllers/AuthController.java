@@ -15,88 +15,88 @@ import modelo.dao.DAOFactory;
 @Controller
 public class AuthController {
 
-	@Inject
-	private Result result;
+  @Inject
+  private Result result;
 
-	public void login(String errorMessage) {
-		setErrorMessage(errorMessage);
-	}
+  public void login(String errorMessage) {
+    setErrorMessage(errorMessage);
+  }
 
-	public void cadastro(String errorMessage) {
-		setErrorMessage(errorMessage);
-	}
+  public void cadastro(String errorMessage) {
+    setErrorMessage(errorMessage);
+  }
 
-	private void setErrorMessage(String errorMessage) {
-		if (errorMessage != null) {
-			result.include("errorMessage", errorMessage);
-			result.include("hasError", true);
-		} else {
-			result.include("hasError", false);
-		}
-	}
+  private void setErrorMessage(String errorMessage) {
+    if (errorMessage != null) {
+      result.include("errorMessage", errorMessage);
+      result.include("hasError", true);
+    } else {
+      result.include("hasError", false);
+    }
+  }
 
-	public void logar(Usuario usuario) {
-		try {
-			var token = new UsernamePasswordToken(usuario.getEmail(), usuario.getSenha(), true);
-			SecurityUtils.getSubject().login(token);
+  public void logar(Usuario usuario) {
+    try {
+      var token = new UsernamePasswordToken(usuario.getEmail(), usuario.getSenha(), true);
+      SecurityUtils.getSubject().login(token);
 
-			result.redirectTo(HomeController.class).index(null);
-		} catch (Exception e) {
-			result.redirectTo(AuthController.class).login(e.getMessage());
-		}
-	}
+      result.redirectTo(HomeController.class).index(null);
+    } catch (Exception e) {
+      result.redirectTo(AuthController.class).login(e.getMessage());
+    }
+  }
 
-	public void cadastrar(Usuario usuario) {
-		var senha = usuario.getSenha();
-		var encryptedSenha = SenhaHelper.gerarHash(usuario.getSenha());
-		usuario.setSenha(encryptedSenha);
-		usuario.setRole("user");
-		try {
-			var daoFac = new DAOFactory();
-			daoFac.abrirConexao();
-			try {
-				var usuarioDAO = daoFac.criarUsuarioDAO();
-				usuarioDAO.registrar(usuario);
+  public void cadastrar(Usuario usuario) {
+    var senha = usuario.getSenha();
+    var encryptedSenha = SenhaHelper.gerarHash(usuario.getSenha());
+    usuario.setSenha(encryptedSenha);
+    usuario.setRole("user");
+    try {
+      var daoFac = new DAOFactory();
+      daoFac.abrirConexao();
+      try {
+        var usuarioDAO = daoFac.criarUsuarioDAO();
+        usuarioDAO.registrar(usuario);
 
-				var token = new UsernamePasswordToken(usuario.getEmail(), senha, true);
-				SecurityUtils.getSubject().login(token);
+        var token = new UsernamePasswordToken(usuario.getEmail(), senha, true);
+        SecurityUtils.getSubject().login(token);
 
-				result.redirectTo(HomeController.class).index(null);
-			} catch (Exception e) {
-				result.redirectTo(AuthController.class).cadastro(e.getMessage());
-			} finally {
-				daoFac.fecharConexao();
-			}
-		} catch (Exception e) {
-			result.redirectTo(AuthController.class).cadastro(e.getMessage());
-		}
-	}
+        result.redirectTo(HomeController.class).index(null);
+      } catch (Exception e) {
+        result.redirectTo(AuthController.class).cadastro(e.getMessage());
+      } finally {
+        daoFac.fecharConexao();
+      }
+    } catch (Exception e) {
+      result.redirectTo(AuthController.class).cadastro(e.getMessage());
+    }
+  }
 
-	@Path("/auth/cadastro-admin")
-	public void cadastroAdmin(String errorMessage) {
-		setErrorMessage(errorMessage);
-	}
+  @Path("/auth/cadastro-admin")
+  public void cadastroAdmin(String errorMessage) {
+    setErrorMessage(errorMessage);
+  }
 
-	@Path("/auth/cadastrar-admin")
-	public void cadastrarAdmin(Usuario usuario) {
-		var encryptedSenha = SenhaHelper.gerarHash(usuario.getSenha());
-		usuario.setSenha(encryptedSenha);
+  @Path("/auth/cadastrar-admin")
+  public void cadastrarAdmin(Usuario usuario) {
+    var encryptedSenha = SenhaHelper.gerarHash(usuario.getSenha());
+    usuario.setSenha(encryptedSenha);
 
-		try {
-			var daoFac = new DAOFactory();
-			daoFac.abrirConexao();
-			try {
-				var usuarioDAO = daoFac.criarUsuarioDAO();
-				usuarioDAO.registrar(usuario);
+    try {
+      var daoFac = new DAOFactory();
+      daoFac.abrirConexao();
+      try {
+        var usuarioDAO = daoFac.criarUsuarioDAO();
+        usuarioDAO.registrar(usuario);
 
-				result.redirectTo(HomeController.class).index(null);
-			} catch (Exception e) {
-				result.redirectTo(AuthController.class).cadastroAdmin(e.getMessage());
-			} finally {
-				daoFac.fecharConexao();
-			}
-		} catch (Exception e) {
-			result.redirectTo(AuthController.class).cadastroAdmin(e.getMessage());
-		}
-	}
+        result.redirectTo(HomeController.class).index(null);
+      } catch (Exception e) {
+        result.redirectTo(AuthController.class).cadastroAdmin(e.getMessage());
+      } finally {
+        daoFac.fecharConexao();
+      }
+    } catch (Exception e) {
+      result.redirectTo(AuthController.class).cadastroAdmin(e.getMessage());
+    }
+  }
 }
