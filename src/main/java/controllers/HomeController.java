@@ -2,26 +2,18 @@ package controllers;
 
 import java.util.Calendar;
 
-import javax.inject.Inject;
-
 import org.apache.shiro.SecurityUtils;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Result;
-import helpers.AuthHelper;
 import modelo.ControleMensal;
 import modelo.dao.DAOFactory;
 
 @Controller
 public class HomeController {
 
-  @Inject
-  private Result result;
-
   @Path("/")
   public ControleMensal index(ControleMensal controleMensal) {
-    AuthHelper.isAuthenticated(result);
     var userEmail = SecurityUtils.getSubject().getPrincipal().toString();
 
     if (controleMensal == null || controleMensal.getAno() == 0) {

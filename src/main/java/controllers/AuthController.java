@@ -81,7 +81,7 @@ public class AuthController {
 	public void cadastrarAdmin(Usuario usuario) {
 		var encryptedSenha = SenhaHelper.gerarHash(usuario.getSenha());
 		usuario.setSenha(encryptedSenha);
-		usuario.setRole("user");
+
 		try {
 			var daoFac = new DAOFactory();
 			daoFac.abrirConexao();

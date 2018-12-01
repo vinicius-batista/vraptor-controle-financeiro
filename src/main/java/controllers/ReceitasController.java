@@ -9,7 +9,6 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
-import helpers.AuthHelper;
 import modelo.ControleMensal;
 import modelo.Receita;
 import modelo.dao.DAOFactory;
@@ -32,14 +31,12 @@ public class ReceitasController {
   @Get
   @Path("/receitas/adicionar")
   public void adicionarForm(String errorMessage) {
-    AuthHelper.isAuthenticated(result);
     this.setErrorMessage(errorMessage);
   }
 
   @Post
   @Path("/receitas/adicionar")
   public void adicionar(Receita receita) {
-    AuthHelper.isAuthenticated(result);
     var userEmail = SecurityUtils.getSubject().getPrincipal().toString();
 
     try {
@@ -64,7 +61,7 @@ public class ReceitasController {
 
           controleMensalDAO.gravar(controleMensal);
         }
-        
+
         receita.setControleMensalId(controleMensal.getId());
 
         receitaDAO.gravar(receita);
@@ -83,7 +80,6 @@ public class ReceitasController {
   @Get
   @Path("/receitas/{receita.id}/edit")
   public Receita editarForm(Receita receita, String errorMessage) {
-    AuthHelper.isAuthenticated(result);
     this.setErrorMessage(errorMessage);
 
     try {
@@ -108,8 +104,6 @@ public class ReceitasController {
   @Post
   @Path("/receitas/editar")
   public void editar(Receita receita) {
-    AuthHelper.isAuthenticated(result);
-
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();
@@ -130,8 +124,6 @@ public class ReceitasController {
 
   @Path("/receitas/{receita.id}/deletar")
   public void deletar(Receita receita) {
-    AuthHelper.isAuthenticated(result);
-
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();

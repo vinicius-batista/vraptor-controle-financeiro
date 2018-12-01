@@ -1,5 +1,6 @@
 <%@tag description="Logged Page template" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="url" value="${pageContext.request.requestURI}"/>
 <c:set var="activeClasses" value="border-blue-dark text-blue-dark"/>
 <c:set var="homeUrl" value="/controle-financeiro/WEB-INF/jsp/home/index.jsp"/>
@@ -77,33 +78,39 @@
                   <span class="ml-4">Adicionar receita</span>
                 </a>
               </div>
-              <div class="flex">
-                <a
-                  href="#4"
-                  class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(relMensalUrl) ? activeClasses : ''}"
-                >
-                  <i class="fas fa-chart-line"></i>
-                  <span class="ml-4">Relatório mensal</span>
-                </a>
-              </div>
-              <div class="flex">
-                <a
-                  href="/controle-financeiro/categorias/"
-                  class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(addCategoriaUrl) ? activeClasses : ''}"
-                >
-                  <i class="fas fa-plus"></i>
-                  <span class="ml-4">Cadastrar categoria</span>
-                </a>
-              </div>
-              <div class="flex">
-                <a
-                  href="/controle-financeiro/auth/cadastro-admin"
-                  class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(addUsuarioUrl) ? activeClasses : ''}"
-                >
-                  <i class="fas fa-user-plus"></i>
-                  <span class="ml-4">Cadastrar Usuário</span>
-                </a>
-              </div>
+              <shiro:hasRole name="admin">
+                <div class="flex">
+                  <a
+                    href="#4"
+                    class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(relMensalUrl) ? activeClasses : ''}"
+                  >
+                    <i class="fas fa-chart-line"></i>
+                    <span class="ml-4">Relatório mensal</span>
+                  </a>
+                </div>
+              </shiro:hasRole>
+              <shiro:hasRole name="admin">
+                <div class="flex">
+                  <a
+                    href="/controle-financeiro/categorias/"
+                    class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(addCategoriaUrl) ? activeClasses : ''}"
+                  >
+                    <i class="fas fa-plus"></i>
+                    <span class="ml-4">Cadastrar categoria</span>
+                  </a>
+                </div>
+              </shiro:hasRole>
+              <shiro:hasRole name="admin">
+                <div class="flex">
+                  <a
+                    href="/controle-financeiro/auth/cadastro-admin"
+                    class="text-grey-darkest w-full p-4 text-lg pl-6 hover:bg-grey-light border-transparent border-r-4 ${url.equals(addUsuarioUrl) ? activeClasses : ''}"
+                  >
+                    <i class="fas fa-user-plus"></i>
+                    <span class="ml-4">Cadastrar Usuário</span>
+                  </a>
+                </div>
+              </shiro:hasRole>
               <div class="flex">
                 <a
                   href="/controle-financeiro/auth/logout"

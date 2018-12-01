@@ -11,7 +11,6 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
-import helpers.AuthHelper;
 import modelo.Categoria;
 import modelo.ControleMensal;
 import modelo.Despesa;
@@ -35,7 +34,6 @@ public class DespesasController {
   @Get
   @Path("/despesas/adicionar")
   public void adicionarForm(String errorMessage) {
-    AuthHelper.isAuthenticated(result);
     this.setErrorMessage(errorMessage);
 
     var categorias = new ArrayList<Categoria>();
@@ -61,7 +59,6 @@ public class DespesasController {
   @Post
   @Path("/despesas/adicionar")
   public void adicionar(Despesa despesa) {
-    AuthHelper.isAuthenticated(result);
     var userEmail = SecurityUtils.getSubject().getPrincipal().toString();
 
     try {
@@ -105,7 +102,6 @@ public class DespesasController {
   @Get
   @Path("/despesas/{despesa.id}/edit")
   public Despesa editarForm(Despesa despesa, String errorMessage) {
-    AuthHelper.isAuthenticated(result);
     this.setErrorMessage(errorMessage);
 
     var categorias = new ArrayList<Categoria>();
@@ -134,8 +130,6 @@ public class DespesasController {
   @Post
   @Path("/despesas/editar")
   public void editar(Despesa despesa) {
-    AuthHelper.isAuthenticated(result);
-
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();
@@ -156,8 +150,6 @@ public class DespesasController {
 
   @Path("/despesas/{despesa.id}/deletar")
   public void deletar(Despesa despesa) {
-    AuthHelper.isAuthenticated(result);
-
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();

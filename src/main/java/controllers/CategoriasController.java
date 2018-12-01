@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
-import helpers.AuthHelper;
 import modelo.Categoria;
 import modelo.dao.DAOFactory;
 
@@ -27,7 +26,6 @@ public class CategoriasController {
 
   @Path("/categorias/")
   public void index(String errorMessage) {
-    AuthHelper.isAuthenticated(result);
     this.setErrorMessage(errorMessage);
 
     var categorias = new ArrayList<Categoria>();
@@ -51,8 +49,6 @@ public class CategoriasController {
   }
 
   public void adicionar(Categoria categoria) {
-    AuthHelper.isAuthenticated(result);
-
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();
@@ -72,7 +68,6 @@ public class CategoriasController {
   }
 
   public void editar(Categoria categoria) {
-    AuthHelper.isAuthenticated(result);
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();
@@ -92,8 +87,6 @@ public class CategoriasController {
   }
 
   public void deletar(Categoria categoria) {
-    AuthHelper.isAuthenticated(result);
-
     try {
       var daoFac = new DAOFactory();
       daoFac.abrirConexao();
